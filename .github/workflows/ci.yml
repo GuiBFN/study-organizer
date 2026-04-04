@@ -25,10 +25,14 @@ jobs:
           pip install pytest
           pip install ruff
 
+      - name: Configurar PYTHONPATH
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+
       - name: Rodar lint
         run: |
           python -m ruff check .
 
       - name: Rodar testes
         run: |
-          python -m pytest
+          python -m pytest tests/
