@@ -20,7 +20,10 @@ Estudantes que têm dificuldade em manter uma rotina de estudos organizada.
 
 ---
 
-## Como executar o projeto
+## Como executar o projeto 
+Abra o terminal:
+(Windows + R)
+- Digite: CMD
 
 Clone o repositório:
 
