@@ -1,35 +1,31 @@
 from src.manager import TaskManager
-from src.task import Task
 
 
 def test_add_task():
     manager = TaskManager()
-    task = Task("Estudar Python")
-
-    manager.add_task(task)
+    manager.add_task("Estudar")
 
     assert len(manager.tasks) == 1
-    assert manager.tasks[0].name == "Estudar Python"
+    assert manager.tasks[0].title == "Estudar"
 
 
-def test_remove_task():
+def test_add_empty_task():
     manager = TaskManager()
-    task = Task("Estudar Python")
 
-    manager.add_task(task)
-    manager.remove_task(0)
+    try:
+        manager.add_task("")
+    except ValueError:
+        assert True
+    else:
+        assert False
 
-    assert len(manager.tasks) == 0
 
-
-def test_list_tasks():
+def test_remove_invalid():
     manager = TaskManager()
-    task1 = Task("Estudar Python")
-    task2 = Task("Revisar CI")
 
-    manager.add_task(task1)
-    manager.add_task(task2)
-
-    tasks = manager.list_tasks()
-
-    assert len(tasks) == 2
+    try:
+        manager.remove_task(0)
+    except IndexError:
+        assert True
+    else:
+        assert False
