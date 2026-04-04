@@ -31,11 +31,16 @@ Clone o repositório:
 git clone https://github.com/GuiBFN/study-organizer.git
 cd study-organizer
 ```
+(aperte enter 2 vezes)
+
 2. Instalar as dependências
 ```bash
 pip install -r requirements.txt
 ```
+(Aperte enter)
+
 3. Executar o programa
 ```bash
 python -m src.main
 ```
+(Aperte enter)
