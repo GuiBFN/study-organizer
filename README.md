@@ -34,5 +34,5 @@ pip install -r requirements.txt
 ```
 3. Executar o programa
 ```bash
-python src/main.py
+python -m src.main
 ```
