@@ -1,4 +1,6 @@
 from src.manager import TaskManager
+from src.api_client import search_books
+
 
 def main():
     manager = TaskManager()
@@ -8,6 +10,7 @@ def main():
         print("1 - Adicionar tarefa")
         print("2 - Listar tarefas")
         print("3 - Remover tarefa")
+        print("4 - Buscar livros para estudar")
         print("0 - Sair")
 
         opcao = input("Escolha uma opção: ")
@@ -35,6 +38,22 @@ def main():
                 print("Tarefa removida com sucesso!")
             except (ValueError, IndexError):
                 print("Índice inválido.")
+
+        elif opcao == "4":
+            query = input("Digite o tema para buscar livros: ")
+            print(f"\nBuscando livros sobre '{query}'...")
+            try:
+                livros = search_books(query)
+                if not livros:
+                    print("Nenhum livro encontrado.")
+                else:
+                    print(f"\n📚 Livros encontrados sobre '{query}':")
+                    for i, livro in enumerate(livros, 1):
+                        autores = ", ".join(livro["authors"][:2])
+                        ano = f" ({livro['year']})" if livro["year"] else ""
+                        print(f"  {i}. {livro['title']} — {autores}{ano}")
+            except ConnectionError as e:
+                print(f"Erro de conexão: {e}")
 
         elif opcao == "0":
             print("Saindo...")
