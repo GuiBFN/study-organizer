@@ -1,7 +1,7 @@
 # Study Organizer
 
 🚀 **APLICAÇÃO DEPLOYADA:**
-[Acesse aqui](https://study-organizer-guibfn.streamlit.app)
+[Acesse aqui](https://study-organizer-gzzjzhcwiprsv9hkk7pjsa.streamlit.app)
 
 Projeto desenvolvido para a disciplina de Bootcamp II.
 
