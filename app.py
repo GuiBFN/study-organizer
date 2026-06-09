@@ -34,11 +34,16 @@ tarefas = manager.list_tasks()
 if not tarefas:
     st.info("Nenhuma tarefa cadastrada. Adicione uma acima!")
 else:
-    for i, tarefa in enumerate(tarefas):
-        col1, col2 = st.columns([5, 1])
-        col1.write(f"**{i}.** {tarefa.title}")
-        if col2.button("🗑️", key=f"remove_{i}"):
-            manager.remove_task(i)
+    for tarefa in tarefas:
+        col1, col2, col3 = st.columns([4, 1, 1])
+        label = f"~~{tarefa['title']}~~" if tarefa["done"] else tarefa["title"]
+        col1.write(label)
+        done_label = "↩️" if tarefa["done"] else "✅"
+        if col2.button(done_label, key=f"done_{tarefa['id']}"):
+            manager.update_task(tarefa["id"], not tarefa["done"])
+            st.rerun()
+        if col3.button("🗑️", key=f"remove_{tarefa['id']}"):
+            manager.remove_task(tarefa["id"])
             st.rerun()
 
 st.divider()

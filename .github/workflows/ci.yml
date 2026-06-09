@@ -2,13 +2,17 @@ name: CI
 
 on:
   push:
-    branches: [ "main", "entrega-intermediaria" ]
+    branches: [ "main", "entrega-intermediaria", "feature/supabase-integration" ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      SUPABASE_URL: https://fake.supabase.co
+      SUPABASE_KEY: fake-key
 
     steps:
       - name: Checkout código
