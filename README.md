@@ -2,9 +2,9 @@
 
 Aplicação web para organização de tarefas de estudo, com interface Streamlit, integração ao Supabase (PostgreSQL) na nuvem e busca de livros via Open Library API.
 
-**Aplicação publicada:** [https://study-organizer-gzzjzhcwiprsv9hkk7pjsa.streamlit.app](https://study-organizer-gzzjzhcwiprsv9hkk7pjsa.streamlit.app)
+**Aplicação publicada:** [Clique aqui!](https://study-organizer-gzzjzhcwiprsv9hkk7pjsa.streamlit.app)
 
-**Repositório:** [https://github.com/GuiBFN/study-organizer](https://github.com/GuiBFN/study-organizer)
+**Repositório:** [Link desse Repositório](https://github.com/GuiBFN/study-organizer)
 
 Projeto desenvolvido para a disciplina de Bootcamp II.
 
