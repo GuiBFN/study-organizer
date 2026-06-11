@@ -30,23 +30,43 @@ st.divider()
 
 # --- Listar e remover tarefas ---
 st.subheader("Minhas Tarefas")
-tarefas = manager.list_tasks()
+todas_tarefas = manager.list_tasks()
+pendentes = [t for t in todas_tarefas if not t["done"]]
+concluidas_count = len([t for t in todas_tarefas if t["done"]])
+pendentes_count = len(pendentes)
+
+col_info1, col_info2, col_info3 = st.columns(3)
+col_info1.metric("Total", len(todas_tarefas))
+col_info2.metric("Pendentes", pendentes_count)
+col_info3.metric("Concluidas", concluidas_count)
+
+status_filtro = st.selectbox(
+    "Filtrar por status:",
+    options=["Todas", "Pendentes", "Concluidas"],
+    key="filtro_status"
+)
+
+if status_filtro == "Pendentes":
+    tarefas = [t for t in todas_tarefas if not t["done"]]
+elif status_filtro == "Concluidas":
+    tarefas = [t for t in todas_tarefas if t["done"]]
+else:
+    tarefas = todas_tarefas
+
 if not tarefas:
-    st.info("Nenhuma tarefa cadastrada. Adicione uma acima!")
+    st.info(f"Nenhuma tarefa encontrada para o filtro '{status_filtro}'.")
 else:
     for tarefa in tarefas:
         col1, col2, col3 = st.columns([4, 1, 1])
         label = f"~~{tarefa['title']}~~" if tarefa["done"] else tarefa["title"]
         col1.write(label)
-        done_label = "↩️" if tarefa["done"] else "✅"
+        done_label = "&#x21A9;" if tarefa["done"] else "&#x2705;"
         if col2.button(done_label, key=f"done_{tarefa['id']}"):
             manager.update_task(tarefa["id"], not tarefa["done"])
             st.rerun()
-        if col3.button("🗑️", key=f"remove_{tarefa['id']}"):
+        if col3.button("&#x1F5D1;", key=f"remove_{tarefa['id']}"):
             manager.remove_task(tarefa["id"])
             st.rerun()
-
-st.divider()
 
 # --- Buscar livros ---
 st.subheader("Buscar Livros para Estudar")
