@@ -23,7 +23,7 @@ with st.form("add_task_form", clear_on_submit=True):
         try:
             manager.add_task(nova_tarefa)
             st.success(f"Tarefa '{nova_tarefa}' adicionada!")
-        except ValueError as e:
+        except (ValueError, RuntimeError) as e:
             st.error(str(e))
 
 st.divider()

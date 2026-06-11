@@ -2,6 +2,7 @@ import os
 
 import streamlit as st
 from dotenv import load_dotenv
+from postgrest.exceptions import APIError as PostgrestAPIError
 from supabase import create_client, Client
 
 load_dotenv()
@@ -26,18 +27,30 @@ class SupabaseClient:
         self._client: Client = create_client(url, key)
 
     def get_tasks(self) -> list[dict]:
-        response = self._client.table("tasks").select("*").order("created_at").execute()
-        return response.data
+        try:
+            response = self._client.table("tasks").select("*").order("created_at").execute()
+            return response.data
+        except PostgrestAPIError as e:
+            raise RuntimeError(f"Erro ao buscar tarefas: {e.message}") from e
 
     def add_task(self, title: str) -> dict:
-        response = self._client.table("tasks").insert({"title": title}).execute()
-        return response.data[0]
+        try:
+            response = self._client.table("tasks").insert({"title": title}).execute()
+            return response.data[0]
+        except PostgrestAPIError as e:
+            raise RuntimeError(f"Erro ao adicionar tarefa: {e.message}") from e
 
     def remove_task(self, task_id: str) -> None:
-        self._client.table("tasks").delete().eq("id", task_id).execute()
+        try:
+            self._client.table("tasks").delete().eq("id", task_id).execute()
+        except PostgrestAPIError as e:
+            raise RuntimeError(f"Erro ao remover tarefa: {e.message}") from e
 
     def update_task(self, task_id: str, done: bool) -> dict:
-        response = (
-            self._client.table("tasks").update({"done": done}).eq("id", task_id).execute()
-        )
-        return response.data[0]
+        try:
+            response = (
+                self._client.table("tasks").update({"done": done}).eq("id", task_id).execute()
+            )
+            return response.data[0]
+        except PostgrestAPIError as e:
+            raise RuntimeError(f"Erro ao atualizar tarefa: {e.message}") from e
