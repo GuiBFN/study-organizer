@@ -12,12 +12,12 @@ Projeto desenvolvido para a disciplina de Bootcamp II.
 
 ## Equipe
 
-| Nome | Matrícula |
-|---|---|
-| Guilherme Borges | 22502047 |
-| Filipe Portela | 22501026 |
-| Caio de Almeida | 22451984 |
-| Danilo Vilela | 22508899 |
+| Nome |
+|---|
+| Guilherme Borges |
+| Filipe Portela |
+| Caio de Almeida |
+| Danilo Vilela |
 
 ---
 
@@ -68,7 +68,7 @@ pip install -r requirements.txt
 Crie um arquivo `.env` na raiz do projeto:
 
 ```
-SUPABASE_URL="https://aajzupwplxptbvxjbuqf.supabase.co"
+SUPABASE_URL="https://SEU-PROJETO.supabase.co"
 SUPABASE_KEY="sua-anon-key-aqui"
 ```
 
