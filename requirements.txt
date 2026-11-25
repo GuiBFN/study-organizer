@@ -3,3 +3,4 @@ ruff
 streamlit
 supabase
 python-dotenv
+elasticsearch>=8,<9
