@@ -29,12 +29,16 @@ def main():
                 print("Nenhuma tarefa cadastrada.")
             else:
                 for i, tarefa in enumerate(tarefas):
-                    print(f"{i} - {tarefa.title}")
+                    status = "✔" if tarefa["done"] else " "
+                    print(f"{i} - [{status}] {tarefa['title']}")
 
         elif opcao == "3":
+            tarefas = manager.list_tasks()
             try:
                 indice = int(input("Digite o índice da tarefa: "))
-                manager.remove_task(indice)
+                if not 0 <= indice < len(tarefas):
+                    raise IndexError
+                manager.remove_task(tarefas[indice]["id"])
                 print("Tarefa removida com sucesso!")
             except (ValueError, IndexError):
                 print("Índice inválido.")
